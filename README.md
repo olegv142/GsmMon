@@ -24,6 +24,8 @@ to be authenticated.
 The SMS sent back as the response will contain the current AC switch state (as 0 or 1),
 temperature and humidity readings, reporting interval and GSM network signal quality metric.
 
+The controller being used is Arduino pro mini 3.3v 8MHz (ATMega328).
+
 ## Author
 
 Oleg Volkov (olegv142@gmail.com)
