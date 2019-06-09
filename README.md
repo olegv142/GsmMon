@@ -8,11 +8,13 @@ the home heating system.
 
 The SMS message sent by operator always starts from the # symbol.
 It may be followed by the following tokens separated by the space or comma:
-  1    turn on  AC switch
-  0    turn off AC switch
-  /n   set reporting interval to n hours
-  p*PIN* authenticate with PIN
-  P*PIN* set new PIN
+```
+  1      turn on  AC switch
+  0      turn off AC switch
+  /n     set reporting interval to n hours
+  p<PIN> authenticate with <PIN>
+  P<PIN> set new <PIN>
+```
 The response will be sent to any authenticated message, even the empty one
 (consisting from the single # symbol).
 The sender is authenticated implicitly unless the PIN is set and the sender address differs
