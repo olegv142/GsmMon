@@ -2,8 +2,8 @@
 GSM home monitor
 
 This device is designed to monitor and report via SMS the temperature and humidity inside the home
-and be able to turn on/off some equipment (e.g. the heater) on receiving SMS from remote operator.
-The are 2 temperature channels with the second one designed to monitor the water temperature in
+and be able to turn on/off some AC powered equipment (e.g. the heater) on receiving SMS from remote operator.
+The are 2 temperature channels with the optional second one designed to monitor the water temperature in
 the home heating system.
 
 The SMS message sent by operator always starts from the # symbol.
@@ -20,6 +20,9 @@ The response will be sent to any authenticated message, even the empty one
 The sender is authenticated implicitly unless the PIN is set and the sender address differs
 from the address used previously. In such case the new sender should provide PIN in order
 to be authenticated.
+
+The SMS sent back as the response will contain the current AC switch state (as 0 or 1),
+temperature and humidity readings, reporting interval and GSM network signal quality metric.
 
 ## Author
 
