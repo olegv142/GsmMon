@@ -197,9 +197,12 @@ static void set_reporting_interval(const char* arg)
 // implicitely authenticated without PIN
 static void save_peer_address()
 {
-    memcpy(g_peer, g_gsm_cmt.c_str() + PEER_OFF, PEER_LEN);
-    nv_put(&g_peer, PEER_LEN, PEER_ADDR);
-    g_peer_valid = true;
+  const char* peer = g_gsm_cmt.c_str() + PEER_OFF;
+  if (g_peer_valid && !strncmp(g_peer, peer, PEER_LEN))
+    return;
+  memcpy(g_peer, peer, PEER_LEN);
+  nv_put(&g_peer, PEER_LEN, PEER_ADDR);
+  g_peer_valid = true;
 }
 
 /*
