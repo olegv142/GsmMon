@@ -169,11 +169,37 @@ static void update_output()
   digitalWrite(ON_PIN, g_on);  
 }
 
+// Set AC switch state
 static void set_output(bool on)
 {
   g_on = on;
   nv_put(&g_on, sizeof(g_on), ON_ADDR);
   update_output();
+}
+
+// Set new PIN
+static void set_pin(const char* pin)
+{
+  strncpy(g_pin, pin, PIN_MAX_LEN);
+  nv_put(&g_pin, PIN_MAX_LEN, PIN_ADDR);
+  g_pin_valid = (g_pin[0] != '\0');
+}
+
+// Set reporting interval
+static void set_reporting_interval(const char* arg)
+{
+  g_rep = atoi(arg);
+  nv_put(&g_rep, sizeof(g_rep), REP_ADDR);
+  g_rep_valid = g_rep > 0;
+}
+
+// Save sender address so it will be
+// implicitely authenticated without PIN
+static void save_peer_address()
+{
+    memcpy(g_peer, g_gsm_cmt.c_str() + PEER_OFF, PEER_LEN);
+    nv_put(&g_peer, PEER_LEN, PEER_ADDR);
+    g_peer_valid = true;
 }
 
 /*
@@ -246,18 +272,12 @@ static bool process_message()
         break;
       case 'P':
         if (auth) {
-          // Set new PIN
-          strncpy(g_pin, arg, PIN_MAX_LEN);
-          nv_put(&g_pin, PIN_MAX_LEN, PIN_ADDR);
-          g_pin_valid = (g_pin[0] != '\0');
+          set_pin(arg);
         }
         break;
       case '/':
         if (auth) {
-          // Set reporting interval
-          g_rep = atoi(arg);
-          nv_put(&g_rep, sizeof(g_rep), REP_ADDR);
-          g_rep_valid = g_rep > 0;
+          set_reporting_interval(arg);
         }
         break;
       }
@@ -267,9 +287,7 @@ static bool process_message()
   }
   if (auth) {
     // Save peer address and respond
-    memcpy(g_peer, g_gsm_cmt.c_str() + PEER_OFF, PEER_LEN);
-    nv_put(&g_peer, PEER_LEN, PEER_ADDR);
-    g_peer_valid = true;
+    save_peer_address();
     return send_report();
   }
   return true;
