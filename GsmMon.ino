@@ -164,10 +164,14 @@ static bool send_report()
   if (sim_ok != g_gsm.send_cmd("+CSQ"))
     return false;
   resp += g_gsm_csq.str();
-  g_last_rep = millis();
-  return
+  if (
     sim_prompt == g_gsm.send_cmd(sms_cmd.c_str()) &&
-    sim_ok     == g_gsm.send_msg(resp.c_str());
+    sim_ok     == g_gsm.send_msg(resp.c_str())
+  ) {
+    g_last_rep = millis();
+    return true;
+  }
+  return false;
 }
 
 static void update_output()
