@@ -150,7 +150,7 @@ static bool send_report()
   String sms_cmd("+CMGS=");
   sms_cmd += peer_addr();
   String resp('#');
-  resp += String(g_on);
+  resp += g_on;
   resp += ' ';
   resp += g_tstr;
   resp += ' ';
@@ -158,14 +158,16 @@ static bool send_report()
   resp += ' ';
   resp += g_tstr2;
   resp += ' ';
-  resp += String(g_rep);
+  resp += g_rep;
   resp += 'h';
   resp += ' ';
+  if (sim_ok != g_gsm.send_cmd("+CSQ"))
+    return false;
+  resp += g_gsm_csq.str();
   g_last_rep = millis();
   return
-    sim_ok     == g_gsm.send_cmd("+CSQ") &&
     sim_prompt == g_gsm.send_cmd(sms_cmd.c_str()) &&
-    sim_ok     == g_gsm.send_msg((resp + g_gsm_csq.str()).c_str());
+    sim_ok     == g_gsm.send_msg(resp.c_str());
 }
 
 static void update_output()
