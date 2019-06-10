@@ -135,15 +135,20 @@ static void on_gsm_err()
   }
 }
 
-static String sender_addr()
+static inline String peer_addr()
 {
   return g_gsm_cmt.str().substring(PEER_OFF, PEER_OFF + PEER_LEN);
+}
+
+static inline const char* peer_addr_ptr()
+{
+  return g_gsm_cmt.c_str() + PEER_OFF;
 }
 
 static bool send_report()
 {
   String sms_cmd("+CMGS=");
-  sms_cmd += sender_addr();
+  sms_cmd += peer_addr();
   String resp('#');
   resp += String(g_on);
   resp += ' ';
@@ -197,7 +202,7 @@ static void set_reporting_interval(const char* arg)
 // implicitely authenticated without PIN
 static void save_peer_address()
 {
-  const char* peer = g_gsm_cmt.c_str() + PEER_OFF;
+  const char* peer = peer_addr_ptr();
   if (g_peer_valid && !strncmp(g_peer, peer, PEER_LEN))
     return;
   memcpy(g_peer, peer, PEER_LEN);
@@ -224,7 +229,7 @@ static bool process_message()
   // The sender is authenticated implicitly unless the PIN is set and the sender address differs
   // from the address used previously. In such case the new sender should provide PIN in order
   // to be authenticated.
-  bool auth = !g_pin_valid || !g_peer_valid || sender_addr() == g_peer;
+  bool auth = !g_pin_valid || !g_peer_valid || !strncmp(g_peer, peer_addr_ptr(), PEER_LEN);
   for (bool done = false; !done; ++ptr) {
     if (*ptr) {
       if (!sptr) {
