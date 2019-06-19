@@ -322,7 +322,7 @@ static void process_gsm()
       } else {
         on_gsm_err();
       }
-    } else if (g_rep_valid && g_last_rep + 3600000ULL < millis()) {
+    } else if (g_rep_valid && g_last_rep + g_rep * 3600000ULL < millis()) {
       if (!send_report()) {
         on_gsm_err();
       }
