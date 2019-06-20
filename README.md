@@ -1,6 +1,8 @@
 # GsmMon
 GSM home monitor
 
+![GSM Home monitor](https://github.com/olegv142/GsmMon/blob/master/images/GsmMon.jpg)
+
 This device is designed to monitor and report via SMS the temperature and humidity inside the home
 and be able to turn on/off some AC powered equipment (e.g. the heater) on receiving SMS from remote operator.
 The are 2 temperature channels with the optional second one designed to monitor the water temperature in
