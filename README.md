@@ -1,7 +1,7 @@
 # GsmMon
 GSM home monitor
 
-![GSM Home monitor](https://github.com/olegv142/GsmMon/blob/master/images/GsmMon.jpg)
+![GSM Home monitor](https://github.com/olegv142/GsmMon/blob/master/doc/GsmMon.jpg)
 
 This device is designed to monitor and report via SMS the temperature and humidity inside the home
 and be able to turn on/off some AC powered equipment (e.g. the heater) on receiving SMS from remote operator.
@@ -27,6 +27,8 @@ The SMS sent back as the response will contain the current AC switch state (as 0
 temperature and humidity readings, reporting interval and GSM network signal quality metric.
 
 The controller being used is Arduino pro mini 3.3v 8MHz (ATMega328).
+
+![GSM Home monitor schematic](https://github.com/olegv142/GsmMon/blob/master/doc/GsmMon.png)
 
 ## Author
 
