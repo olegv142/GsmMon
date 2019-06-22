@@ -26,9 +26,21 @@ to be authenticated.
 The SMS sent back as the response will contain the current AC switch state (as 0 or 1),
 temperature and humidity readings, reporting interval and GSM network signal quality metric.
 
-The controller being used is Arduino pro mini 3.3v 8MHz (ATMega328).
+The controller being used is Arduino pro mini 3.3v 8MHz (ATMega328). The full connection diagram is shown below:
 
 ![GSM Home monitor schematic](https://github.com/olegv142/GsmMon/blob/master/doc/GsmMon.png)
+
+The sketch uses the following libraries:
+
+[SimpleSIM](https://github.com/olegv142/SimpleSIM)
+
+[Display](https://github.com/olegv142/Display)
+
+[BME280](https://github.com/olegv142/BME280)
+
+[DS18B20](https://github.com/olegv142/DS18B20)
+
+[OneWire](https://github.com/olegv142/OneWire)
 
 ## Author
 
