@@ -30,6 +30,10 @@ The controller being used is Arduino pro mini 3.3v 8MHz (ATMega328). The full co
 
 ![GSM Home monitor schematic](https://github.com/olegv142/GsmMon/blob/master/doc/GsmMon.png)
 
+To reduce EMI the GSM radio module is placed in the separate metal box as seen on the following figure.
+
+![Radio module housing](https://github.com/olegv142/GsmMon/blob/master/doc/radio.jpg)
+
 The sketch uses the following libraries:
 
 [SimpleSIM](https://github.com/olegv142/SimpleSIM)
