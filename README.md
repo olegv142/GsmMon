@@ -34,6 +34,11 @@ To reduce EMI the GSM radio module is placed in the separate metal box as seen o
 
 ![Radio module housing](https://github.com/olegv142/GsmMon/blob/master/doc/radio.jpg)
 
+Using external antenna separated from the device is absolutely necessary to avoid destructive EMI from the radio module.
+Otherwise its transmission bursts are able to cause Arduino resetting. The distance from the device to antenna 
+(and so the cable length) should be long enough in comparison to the radio carrier wavelength (~30 cm).
+At least 1 meter of cable is recommended.
+
 The sketch uses the following libraries:
 
 [SimpleSIM](https://github.com/olegv142/SimpleSIM)
